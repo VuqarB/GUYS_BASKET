@@ -132,6 +132,79 @@ categoriesDropdown.addEventListener('click', () => {
     })
 })
 
+const shoppingCart = document.querySelector('#shopping_cart')
+const cartWrapper = document.querySelector('.cartWrapper')
+const cartClose = document.querySelector('#cart_close')
+
+shoppingCart.addEventListener('click', () => {
+    cartWrapper.classList.add('active')
+})
+cartClose.addEventListener('click', () => {
+    cartWrapper.classList.remove('active')
+})
+
+// if (document.readyState == 'loading') {
+//     document.addEventListener('DOMContentLoaded', ready)
+// } else {
+//     ready()
+// }
+
+
+window.addEventListener('load', ready)
+function ready() {
+    const removeCartBtns = document.querySelectorAll('.cart__remove')
+    const quantityInputs = document.querySelectorAll('.cart__quantity')
+    // const addCart = document.getElementsByClassName('add-basket')
+
+    removeCartBtns.forEach((el) => {
+        el.addEventListener('click', removeCartItems)
+    })
+    quantityInputs.forEach((el) => {
+        el.addEventListener('change', quantityChanged)
+    })
+    // for (let i = 0; i < addCart.length; i++) {
+    //     const btn = addCart[i]  
+    //     btn.addEventListener('click', addCartClicked)     
+    // }
+}
+
+function removeCartItems(ev) {
+    ev.target.parentElement.remove()
+    updateTotal()
+}
+
+function quantityChanged(ev) {
+    if (isNaN(ev.target.value) || ev.target.value <= 0) {
+        ev.target.value = 1
+    }
+    updateTotal()
+}
+
+// function addCartClicked(ev) {
+//     const productItems = ev.target.parentElement.parentElement.parentElement
+//     console.log(productItems)
+// }
+
+
+function updateTotal() {
+    let cartContent = document.getElementsByClassName('cart__content')[0]
+    let cartBoxes = cartContent.getElementsByClassName('cart__box')
+    let total = 0;
+    for (let i = 0; i < cartBoxes.length; i++) {
+        const cartBox = cartBoxes[i]
+        const priceElement = cartBox.getElementsByClassName('cart__product-price')[0]
+        const quantityElement = cartBox.getElementsByClassName('cart__quantity')[0]
+        const price = parseFloat(priceElement.innerText.replace('$', ''))
+        const quantity = quantityElement.value
+        total = total + (price * quantity)
+        total = Math.round(total * 100) / 100
+
+        document.getElementsByClassName('cart__total-price')[0].innerText = '$' + total
+    }
+}
+
+
+
 const swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
     spaceBetween: 30,
@@ -280,6 +353,7 @@ window.addEventListener('load', () => {
     const response = JSON.parse(localStorage.getItem('products'))
     response.slice(0, 3).map((data) => productComponent(data))
     response.slice(0, 8).map((data) => checkOutComponent(data))
+
 })
 
 function viewAllProductsFunc(wrapper, component) {
@@ -300,7 +374,7 @@ viewAllCheckOut.addEventListener('click', (e) => {
 
 const checkOutLinks = document.querySelectorAll('.checkOut__link')
 checkOutLinks.forEach((el) => {
-    el.addEventListener('click', function() {
+    el.addEventListener('click', function () {
         checkOutLinks.forEach((el) => el.classList.remove('active'))
         this.classList.add('active')
     })

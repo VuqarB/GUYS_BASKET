@@ -15,6 +15,11 @@ body {
 
 
 /* =========== HEADER =========== */
+
+.header {
+    position: relative;
+}
+
 .wrapper .ellipse {
     position: absolute;
     top: 0;
@@ -219,7 +224,7 @@ body {
 }
 
 .categories-dropdown-link:hover {
-    color: #2b2b2b
+    color: #2b2b2b;
 }
 
 .categories-dropdown-item-selected {
@@ -233,6 +238,125 @@ body {
 .categories-dropdown-item:hover {
     background: rgb(234, 231, 231);
 }
+
+
+
+.cartWrapper {
+    position: fixed;
+    top: 0;
+    right: -200%;
+    z-index: 120;
+
+    width: 400px;
+    min-height: 100vh;
+    padding: 20px 40px;
+    background: #fff;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, .1);
+    transition: all .3s ease;
+}
+.cartWrapper.active {
+    right: 0;
+}
+
+
+.cart__box {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.cart__box img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.cart__detail {
+    margin-right: 2rem;
+}
+
+.cart__product-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.cart__product-price {
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+.cart__quantity {
+    border: 1px solid #000;
+    width: 3rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cart__remove {
+    font-size: 1.5rem;
+    color: #f00;
+    cursor: pointer;
+}
+
+.cart__total {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    border-top: 1px solid #000;
+}
+
+.cart__total-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cart__total-price {
+    margin-left: .5rem;
+}
+
+.btn-buy {
+    display: flex;
+    margin: 1.5rem auto 0;
+    padding: 12px 20px;
+    border: none;
+    background: rgb(0, 255, 0);
+
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.btn-buy:hover {
+    background: rgb(0, 235, 0);
+}
+
+.cart__close {
+    position: absolute;
+    top: 1rem;
+    right: 0.8rem;
+    cursor: pointer;
+}
+
+.cart__bar {
+    display: block;
+    height: 2px;
+    width: 25px;
+    margin: 6px 0;
+    border-radius: 10px;
+    background-color: #2b2b2b;
+    transition: all .3s ease;
+}
+
+.cart__bar:first-child {
+    transform: translateY(-3px) rotate(45deg);
+}
+
+.cart__bar:last-child {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
 
 .header__burger {
     display: none;
